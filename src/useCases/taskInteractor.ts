@@ -1,22 +1,38 @@
 import Task, { setState, TaskState } from '../entities/Task'
 
-// storeなどの仕組みには関知しない形でロジックを実装する
-// repository, api などを受け取れるような高階関数にする
-export const addTask = (/*{ repository, api }*/) => (
-  tasks: Task[],
-  task: Task
-) => {
-  const addedTasks = tasks.concat(task)
-
-  // repository(データ永続化)
-  // repository.addTask()
-
-  // api
-  // api.save()
-
-  return addedTasks
+export interface TaskStoreState {
+  tasks: Task[]
+}
+export interface TaskStoreActions {
+  add: (task: Task) => void
+  update: ({ index, task }: { index: number; task: Task }) => void
 }
 
-export const complete = () => (task: Task) => {
-  return setState(task, TaskState.DONE)
+interface TaskStoreModule {
+  state: TaskStoreState
+  actions: TaskStoreActions
+}
+
+export class TaskInteractor {
+  store: TaskStoreModule
+
+  constructor(store: TaskStoreModule) {
+    this.store = store
+  }
+
+  addTask(task: Task) {
+    // store
+    this.store.actions.add(task)
+
+    // repository
+    // this.repository.save(tasks)
+
+    // api
+    // this.api.save(tasks)
+  }
+
+  complete(index: number) {
+    const task = this.store.state.tasks[index]
+    this.store.actions.update({ index, task: setState(task, TaskState.DONE) })
+  }
 }
