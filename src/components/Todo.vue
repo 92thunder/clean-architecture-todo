@@ -18,20 +18,20 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Task, { TaskState } from "../entities/Task";
+import Vue from 'vue'
+import Task, { TaskState } from '../entities/Task'
 // シングルトンを直でインポートするとコンテキストを注入できないため
 // テストやSSRなどの時に困る可能性がありそう
 // import store from '../store';
 
 export default Vue.extend({
-  name: "Todo",
+  name: 'Todo',
   data: (): { text: string } => ({
-    text: ""
+    text: ''
   }),
   computed: {
     tasks(): Task[] {
-      return this.$store.state.task.tasks;
+      return this.$store.state.task.tasks
     }
   },
   methods: {
@@ -40,22 +40,22 @@ export default Vue.extend({
       // 入力値をusecaseのいいようにいじってやるcontroller的な役割になってるかも
       const task: Task = {
         title: this.text,
-        description: "",
+        description: '',
         state: TaskState.TODO
-      };
+      }
 
-      this.$store.dispatch('addTask', task);
+      this.$store.dispatch('addTask', task)
 
-      this.text = "";
+      this.text = ''
     },
     complete(index: number) {
-      this.$store.dispatch('complete', index);
+      this.$store.dispatch('complete', index)
     },
     isCompleted(task: Task) {
-      return task.state !== TaskState.DONE;
+      return task.state !== TaskState.DONE
     }
   }
-});
+})
 </script>
 
 <style scoped>

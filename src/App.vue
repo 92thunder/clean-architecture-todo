@@ -5,20 +5,20 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Todo from "./components/Todo.vue";
+import Vue from 'vue'
+import Todo from './components/Todo.vue'
 
 export default Vue.extend({
-  name: "app",
+  name: 'app',
   components: {
     Todo
   }
-});
+})
 </script>
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
