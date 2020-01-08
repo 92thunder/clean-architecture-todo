@@ -28,7 +28,9 @@ export default Vue.extend({
   data: (): { text: string } => ({
     text: ''
   }),
+
   computed: taskMapper.mapGetters(['tasks']),
+
   methods: {
     ...controllersMapper.mapActions(['addTask', 'complete']),
 
