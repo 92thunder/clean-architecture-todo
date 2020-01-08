@@ -1,15 +1,16 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import * as task from "./modules/task";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import { task } from './modules/task'
+import { createStore, Module } from 'vuex-smart-module'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-export interface RootState {
-  task: task.TaskState;
-}
-
-export default new Vuex.Store<RootState>({
+const root = new Module({
   modules: {
-    task: task.store
+    task
   }
-});
+})
+
+export const store = createStore(root, {
+  strict: process.env.NODE_ENV !== 'production'
+})

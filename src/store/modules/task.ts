@@ -1,38 +1,43 @@
-import { Module, MutationTree, ActionTree } from "Vuex";
-import Task from "../../entities/Task";
-import { RootState } from "../index";
-import { addTask, complete } from '@/useCases/taskInteractor';
+import { Mutations, Actions, Getters, Module } from 'vuex-smart-module'
+import Task from '../../entities/Task'
+import { addTask, complete } from '@/useCases/taskInteractor'
 
-export interface TaskState {
-  tasks: Task[];
+class state {
+  tasks: Task[] = []
 }
 
-export const state: TaskState = {
-  tasks: []
-};
+class getters extends Getters<state> {
+  get tasks() {
+    return this.state.tasks
+  }
+}
 
 // 状態の更新はVuex流に合わせ、API通信などについてはusecase側にロジックを隠蔽する
-const mutations: MutationTree<TaskState> = {
-  updateTasks: (state, tasks: Task[]) => {
-    state.tasks = tasks;
-  },
-  updateTask: (state, { index, task }: { index: number, task: Task }) => {
-    state.tasks.splice(index, 1, task);
+class mutations extends Mutations<state> {
+  updateTasks(tasks: Task[]) {
+    this.state.tasks = tasks
   }
-};
+
+  updateTask({ index, task }: { index: number; task: Task }) {
+    this.state.tasks.splice(index, 1, task)
+  }
+}
 
 // 状態の更新はVuex流に合わせ、API通信などについてはusecase側にロジックを隠蔽する
-const actions: ActionTree<TaskState, RootState> = {
-  addTask: ({ commit, state }, task: Task) => {
-    commit('updateTasks', addTask()(state.tasks, task));
-  },
-  complete: ({ commit }, index: number) => {
-    commit('updateTask', { index, task: complete()(state.tasks[index]) });
+class actions extends Actions<state, getters, mutations> {
+  addTask(task: Task) {
+    this.commit('updateTasks', addTask()(this.state.tasks, task))
   }
-};
+  complete(index: number) {
+    this.commit('updateTask', {
+      index,
+      task: complete()(this.state.tasks[index])
+    })
+  }
+}
 
-export const store: Module<TaskState, RootState> = {
+export const task = new Module({
   state,
   mutations,
   actions
-};
+})
