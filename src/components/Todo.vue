@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Task, { TaskState } from '../entities/Task'
+import Task from '../entities/Task'
 import { controllersMapper } from '@/store/modules/controllers'
 import { taskMapper } from '@/store/modules/domain/task'
 
@@ -40,7 +40,7 @@ export default Vue.extend({
       this.complete(index)
     },
     isCompleted(task: Task) {
-      return task.state !== TaskState.DONE
+      return task.state !== 'DONE'
     }
   }
 })

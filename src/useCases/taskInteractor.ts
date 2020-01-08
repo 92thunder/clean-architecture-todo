@@ -1,4 +1,4 @@
-import Task, { setState, TaskState } from '../entities/Task'
+import Task, { setState } from '../entities/Task'
 
 export interface TaskStoreState {
   tasks: Task[]
@@ -33,6 +33,6 @@ export class TaskInteractor {
 
   complete(index: number) {
     const task = this.store.state.tasks[index]
-    this.store.actions.update({ index, task: setState(task, TaskState.DONE) })
+    this.store.actions.update({ index, task: setState(task, 'DONE') })
   }
 }

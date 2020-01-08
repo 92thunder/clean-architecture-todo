@@ -7,7 +7,6 @@ import {
 } from 'vuex-smart-module'
 import Task from '@/entities/Task'
 import { TaskInteractor } from '@/useCases/taskInteractor'
-import { TaskState } from '@/entities/Task'
 import { Store } from 'vuex'
 import { task } from '../domain/task'
 
@@ -32,7 +31,7 @@ class actions extends Actions<state, getters, mutations> {
     const task: Task = {
       title,
       description: '',
-      state: TaskState.TODO
+      state: 'TODO'
     }
     this.taskInteractor.addTask(task)
   }
