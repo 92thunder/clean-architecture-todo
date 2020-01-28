@@ -29,10 +29,14 @@ export default Vue.extend({
     text: ''
   }),
 
+  created() {
+    this.load()
+  },
+
   computed: taskMapper.mapGetters(['tasks']),
 
   methods: {
-    ...controllersMapper.mapActions(['addTask', 'complete']),
+    ...controllersMapper.mapActions(['addTask', 'complete', 'load']),
 
     add() {
       this.addTask(this.text)

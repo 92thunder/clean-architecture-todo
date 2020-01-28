@@ -9,6 +9,7 @@ import Task from '@/entities/Task'
 import { TaskInteractor } from '@/useCases/taskInteractor'
 import { Store } from 'vuex'
 import { task } from '../domain/task'
+import { TaskRepository } from '@/repositories'
 
 class state {}
 
@@ -20,7 +21,10 @@ class actions extends Actions<state, getters, mutations> {
   taskInteractor!: TaskInteractor
 
   $init(store: Store<any>) {
-    this.taskInteractor = new TaskInteractor(task.context(store))
+    this.taskInteractor = new TaskInteractor(
+      task.context(store),
+      new TaskRepository(localStorage)
+    )
   }
 
   addTask(title: string) {
@@ -38,6 +42,10 @@ class actions extends Actions<state, getters, mutations> {
 
   complete(index: number) {
     this.taskInteractor.complete(index)
+  }
+
+  load() {
+    this.taskInteractor.load()
   }
 }
 
