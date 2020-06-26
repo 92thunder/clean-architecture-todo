@@ -10,3 +10,7 @@ export function createTask(title: string): Task {
     state: 'TODO'
   }
 }
+
+export function visibleTasks(tasks: Task[]) {
+  return tasks.filter(task => task.state === 'TODO')
+}

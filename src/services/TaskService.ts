@@ -20,9 +20,8 @@ export class TaskService {
 
   complete(index: number) {
     const tasks = this.repository.load()
-    const task = tasks[index]
     const completedTask = setState(tasks[index], 'DONE')
-    tasks[index] = task
+    tasks[index] = completedTask
     this.repository.save(tasks)
     return completedTask
   }

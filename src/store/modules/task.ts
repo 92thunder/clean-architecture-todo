@@ -6,7 +6,7 @@ import {
   createMapper,
   Context
 } from 'vuex-smart-module'
-import { Task } from '@/entities/task'
+import { Task, visibleTasks } from '@/entities/task'
 import { TaskService } from '@/services/TaskService'
 import { TaskRepository } from '@/repositories'
 import { flash } from './flash'
@@ -18,7 +18,7 @@ class state {
 
 class getters extends Getters<state> {
   get tasks() {
-    return this.state.tasks
+    return visibleTasks(this.state.tasks)
   }
 }
 
