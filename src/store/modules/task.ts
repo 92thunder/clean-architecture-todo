@@ -34,11 +34,15 @@ class mutations extends Mutations<state> {
 
 class actions extends Actions<state, getters, mutations> {
   flash!: Context<typeof flash>
-  taskService!: TaskService
+  taskService: TaskService
+
+  constructor() {
+    super()
+    this.taskService = new TaskService(new TaskRepository())
+  }
 
   $init(store: Store<any>) {
     this.flash = flash.context(store)
-    this.taskService = new TaskService(new TaskRepository())
   }
 
   addTask(title: string) {
