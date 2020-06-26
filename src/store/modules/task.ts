@@ -3,11 +3,14 @@ import {
   Actions,
   Getters,
   Module,
-  createMapper
+  createMapper,
+  Context
 } from 'vuex-smart-module'
 import { Task } from '@/entities/task'
 import { TaskService } from '@/services/TaskService'
 import { TaskRepository } from '@/repositories'
+import { flash } from './flash'
+import { Store } from 'vuex'
 
 class state {
   tasks: Task[] = []
@@ -32,9 +35,11 @@ class mutations extends Mutations<state> {
 
 // 状態の更新はVuex流に合わせ、API通信などについてはusecase側にロジックを隠蔽する
 class actions extends Actions<state, getters, mutations> {
+  flash!: Context<typeof flash>
   taskService!: TaskService
 
-  $init() {
+  $init(store: Store<any>) {
+    this.flash = flash.context(store)
     this.taskService = new TaskService(new TaskRepository())
   }
 
@@ -46,9 +51,13 @@ class actions extends Actions<state, getters, mutations> {
   }
 
   addTask(title: string) {
-    const tasks = this.taskService.addTask(title)
+    try {
+      const tasks = this.taskService.addTask(title)
 
-    this.commit('updateTasks', tasks)
+      this.commit('updateTasks', tasks)
+    } catch (e) {
+      this.flash.dispatch('showFlash', e.message)
+    }
   }
 
   complete(index: number) {

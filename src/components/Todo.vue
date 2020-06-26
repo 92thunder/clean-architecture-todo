@@ -2,6 +2,7 @@
   <div>
     <h1>TODO</h1>
     <input @keydown.enter="add" v-model="text" />
+    <Flash />
     <ul>
       <li
         v-for="(task, index) in tasks"
@@ -21,9 +22,15 @@
 import Vue from 'vue'
 import { Task } from '../entities/task'
 import { taskMapper } from '@/store/modules/task'
+import Flash from './Flash.vue'
 
 export default Vue.extend({
   name: 'Todo',
+
+  components: {
+    Flash
+  },
+
   data: (): { text: string } => ({
     text: ''
   }),
