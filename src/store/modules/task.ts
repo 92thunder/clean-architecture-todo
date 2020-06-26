@@ -22,7 +22,6 @@ class getters extends Getters<state> {
   }
 }
 
-// 状態の更新はVuex流に合わせ、API通信などについてはusecase側にロジックを隠蔽する
 class mutations extends Mutations<state> {
   updateTasks(tasks: Task[]) {
     this.state.tasks = tasks
@@ -33,7 +32,6 @@ class mutations extends Mutations<state> {
   }
 }
 
-// 状態の更新はVuex流に合わせ、API通信などについてはusecase側にロジックを隠蔽する
 class actions extends Actions<state, getters, mutations> {
   flash!: Context<typeof flash>
   taskService!: TaskService
