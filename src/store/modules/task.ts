@@ -41,13 +41,6 @@ class actions extends Actions<state, getters, mutations> {
     this.taskService = new TaskService(new TaskRepository())
   }
 
-  update({ index, task }: { index: number; task: Task }) {
-    this.commit('updateTask', {
-      index,
-      task
-    })
-  }
-
   addTask(title: string) {
     try {
       const tasks = this.taskService.addTask(title)
