@@ -11,8 +11,8 @@ interface IStorage {
 export class TaskRepository implements ITaskRepository {
   storage: IStorage
 
-  constructor(storage: IStorage) {
-    this.storage = storage
+  constructor() {
+    this.storage = localStorage
   }
 
   load() {

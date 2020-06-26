@@ -35,7 +35,7 @@ class actions extends Actions<state, getters, mutations> {
   taskService!: TaskService
 
   $init() {
-    this.taskService = new TaskService(new TaskRepository(localStorage))
+    this.taskService = new TaskService(new TaskRepository())
   }
 
   update({ index, task }: { index: number; task: Task }) {
