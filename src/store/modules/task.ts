@@ -6,9 +6,10 @@ import {
   createMapper
 } from 'vuex-smart-module'
 import { Task } from '@/entities/task'
-import { TaskStoreActions, TaskStoreState } from '@/interfaces/store'
+import { TaskService } from '@/services/TaskService'
+import { TaskRepository } from '@/repositories'
 
-class state implements TaskStoreState {
+class state {
   tasks: Task[] = []
 }
 
@@ -30,16 +31,34 @@ class mutations extends Mutations<state> {
 }
 
 // 状態の更新はVuex流に合わせ、API通信などについてはusecase側にロジックを隠蔽する
-class actions extends Actions<state, getters, mutations>
-  implements TaskStoreActions {
-  add(task: Task) {
-    this.commit('updateTasks', this.state.tasks.concat(task))
+class actions extends Actions<state, getters, mutations> {
+  taskService!: TaskService
+
+  $init() {
+    this.taskService = new TaskService(new TaskRepository(localStorage))
   }
+
   update({ index, task }: { index: number; task: Task }) {
     this.commit('updateTask', {
       index,
       task
     })
+  }
+
+  addTask(title: string) {
+    const tasks = this.taskService.addTask(title)
+
+    this.commit('updateTasks', tasks)
+  }
+
+  complete(index: number) {
+    const completedTask = this.taskService.complete(index)
+    this.commit('updateTask', { index, task: completedTask })
+  }
+
+  load() {
+    const tasks = this.taskService.load()
+    this.commit('updateTasks', tasks)
   }
 }
 

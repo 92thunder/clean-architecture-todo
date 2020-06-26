@@ -20,8 +20,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Task } from '../entities/task'
-import { controllersMapper } from '@/store/modules/controllers'
-import { taskMapper } from '@/store/modules/domain/task'
+import { taskMapper } from '@/store/modules/task'
 
 export default Vue.extend({
   name: 'Todo',
@@ -36,7 +35,7 @@ export default Vue.extend({
   computed: taskMapper.mapGetters(['tasks']),
 
   methods: {
-    ...controllersMapper.mapActions(['addTask', 'complete', 'load']),
+    ...taskMapper.mapActions(['addTask', 'complete', 'load']),
 
     add() {
       this.addTask(this.text)
@@ -58,5 +57,6 @@ export default Vue.extend({
 }
 ul {
   list-style: none;
+  padding: 0;
 }
 </style>

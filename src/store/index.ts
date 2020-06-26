@@ -1,14 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { task } from './modules/domain/task'
-import { controllers } from './modules/controllers'
+import { task } from './modules/task'
 import { createStore, Module } from 'vuex-smart-module'
 
 Vue.use(Vuex)
 
 const root = new Module({
   modules: {
-    controllers,
     task
   }
 })
