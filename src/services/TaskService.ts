@@ -10,8 +10,12 @@ export class TaskService {
 
   addTask(title: string) {
     try {
+      // Domain/utilsでtask作成
       const task = createTask(title)
+
+      // Repositoryを使って保存する
       const tasks = this.repository.add(task)
+
       return tasks
     } catch (e) {
       throw e

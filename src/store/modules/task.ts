@@ -43,10 +43,13 @@ class actions extends Actions<state, getters, mutations> {
 
   addTask(title: string) {
     try {
+      // 永続化などアプリケーションとしての仕事はApplicationServiceに任せる
       const tasks = this.taskService.addTask(title)
 
+      // Serviceの返り値をStoreに反映
       this.commit('updateTasks', tasks)
     } catch (e) {
+      // エラーがあればUIに反映する
       this.flash.dispatch('showFlash', e.message)
     }
   }
