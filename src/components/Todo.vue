@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Task from '../entities/Task'
+import { Task } from '../entities/task'
 import { controllersMapper } from '@/store/modules/controllers'
 import { taskMapper } from '@/store/modules/domain/task'
 

@@ -1,5 +1,5 @@
 import { ITaskRepository } from '@/interfaces/repository/index'
-import Task from '@/entities/Task'
+import { Task } from '@/entities/task'
 
 interface IStorage {
   getItem: (key: string) => string | null

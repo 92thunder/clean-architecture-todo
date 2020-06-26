@@ -1,4 +1,4 @@
-import Task from '@/entities/Task'
+import { Task } from '@/entities/task'
 
 export interface TaskStoreState {
   tasks: Task[]

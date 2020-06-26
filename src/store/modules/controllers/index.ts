@@ -5,7 +5,7 @@ import {
   Module,
   createMapper
 } from 'vuex-smart-module'
-import Task from '@/entities/Task'
+import { Task } from '@/entities/task'
 import { TaskInteractor } from '@/useCases/taskInteractor'
 import { Store } from 'vuex'
 import { task } from '../domain/task'

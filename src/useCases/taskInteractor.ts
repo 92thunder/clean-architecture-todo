@@ -1,4 +1,4 @@
-import Task, { setState } from '../entities/Task'
+import { Task, setState } from '@/entities/task'
 import { TaskStoreState, TaskStoreActions } from '@/interfaces/store'
 import { ITaskRepository } from '@/interfaces/repository'
 

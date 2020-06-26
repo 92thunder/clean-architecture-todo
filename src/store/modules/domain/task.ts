@@ -5,7 +5,7 @@ import {
   Module,
   createMapper
 } from 'vuex-smart-module'
-import Task from '../../../entities/Task'
+import { Task } from '@/entities/task'
 import { TaskStoreActions, TaskStoreState } from '@/interfaces/store'
 
 class state implements TaskStoreState {
