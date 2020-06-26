@@ -1,5 +1,5 @@
 import { ITaskRepository } from '@/interfaces/repository/index'
-import { Task } from '@/entities/task'
+import { Task } from '@/domain/task'
 
 const KEY = 'tasks'
 

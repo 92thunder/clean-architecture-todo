@@ -6,7 +6,7 @@ import {
   createMapper,
   Context
 } from 'vuex-smart-module'
-import { Task, visibleTasks } from '@/entities/task'
+import { Task, visibleTasks } from '@/domain/task'
 import { TaskService } from '@/services/TaskService'
 import { TaskRepository } from '@/repositories'
 import { flash } from './flash'

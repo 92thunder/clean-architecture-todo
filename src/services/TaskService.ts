@@ -1,4 +1,4 @@
-import { createTask, setState } from '@/entities/task'
+import { createTask, setState } from '@/domain/task'
 import { ITaskRepository } from '@/interfaces/repository'
 
 export class TaskService {

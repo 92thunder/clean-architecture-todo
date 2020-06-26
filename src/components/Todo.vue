@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Task } from '../entities/task'
+import { Task } from '../domain/task'
 import { taskMapper } from '@/store/modules/task'
 import Flash from './Flash.vue'
 

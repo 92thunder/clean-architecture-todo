@@ -1,4 +1,4 @@
-import { Task } from '@/entities/task'
+import { Task } from '@/domain/task'
 
 export interface ITaskRepository {
   load: () => Task[]
