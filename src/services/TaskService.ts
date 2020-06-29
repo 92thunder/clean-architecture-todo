@@ -1,4 +1,4 @@
-import { createTask, setState } from '@/domain/task'
+import { createTask, setState, Task } from '@/domain/task'
 import { ITaskRepository } from '@/interfaces/repository'
 
 export class TaskService {
@@ -8,7 +8,7 @@ export class TaskService {
     this.repository = repository
   }
 
-  addTask(title: string) {
+  addTask(title: string): Task[] {
     try {
       // Domain/utilsでtask作成
       const task = createTask(title)
