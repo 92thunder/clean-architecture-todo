@@ -1,4 +1,4 @@
-import { createTask, setState, Task } from '@/domain/task'
+import { createTask, Task, changeState } from '@/domain/task'
 import { ITaskRepository } from '@/interfaces/repository'
 
 export class TaskService {
@@ -24,7 +24,7 @@ export class TaskService {
 
   complete(index: number) {
     const tasks = this.repository.load()
-    const completedTask = setState(tasks[index], 'DONE')
+    const completedTask = changeState(tasks[index], 'DONE')
     tasks[index] = completedTask
     this.repository.save(tasks)
     return completedTask
